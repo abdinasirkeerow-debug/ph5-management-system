@@ -76,6 +76,8 @@
 
   /* ---------- Modal ---------- */
   var activeModal = null;
+  var escapeKeyHandler = null;
+  
   function openModal(opts) {
     closeModal();
     var backdrop = document.createElement('div');
@@ -92,6 +94,17 @@
     backdrop.appendChild(modal);
     backdrop.addEventListener('click', function (e) { if (e.target === backdrop && !opts.locked) closeModal(); });
     modal.querySelector('.modal-close').addEventListener('click', function () { if (!opts.locked) closeModal(); });
+    
+    // Add Escape key handler
+    if (!opts.locked) {
+      escapeKeyHandler = function (e) {
+        if (e.key === 'Escape') {
+          closeModal();
+        }
+      };
+      document.addEventListener('keydown', escapeKeyHandler);
+    }
+    
     document.body.appendChild(backdrop);
     activeModal = backdrop;
     return {
@@ -102,10 +115,15 @@
       close: closeModal
     };
   }
+  
   function closeModal() {
     if (activeModal) {
       if (activeModal.parentNode) activeModal.parentNode.removeChild(activeModal);
       activeModal = null;
+      if (escapeKeyHandler) {
+        document.removeEventListener('keydown', escapeKeyHandler);
+        escapeKeyHandler = null;
+      }
     }
   }
 
