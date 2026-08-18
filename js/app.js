@@ -82,6 +82,7 @@
     currentPage = key;
     try {
       page(view, null);
+      PH5.ui.applyMobileTableLabels(view);
     } catch (err) {
       renderError(err.message || String(err));
     }
