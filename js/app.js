@@ -82,6 +82,7 @@
     currentPage = key;
     try {
       page(view, null);
+      PH5.ui.applyMobileTableLabels(view);
     } catch (err) {
       renderError(err.message || String(err));
     }
@@ -151,6 +152,7 @@
     var ov = document.getElementById('sidebar-overlay');
     if (sb) sb.classList.remove('open');
     if (ov) ov.classList.remove('show');
+    document.body.style.overflow = '';
   }
 
   /* ---------- Boot ---------- */
@@ -197,8 +199,23 @@
     document.getElementById('menu-btn').addEventListener('click', function () {
       document.getElementById('sidebar').classList.add('open');
       document.getElementById('sidebar-overlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
     });
-    document.getElementById('sidebar-overlay').addEventListener('click', closeMobileMenu);
+    document.getElementById('sidebar-overlay').addEventListener('click', function () {
+      closeMobileMenu();
+      document.body.style.overflow = '';
+    });
+
+    /* Escape key to close mobile menu */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        var sb = document.getElementById('sidebar');
+        if (sb && sb.classList.contains('open')) {
+          closeMobileMenu();
+          document.body.style.overflow = '';
+        }
+      }
+    });
 
     /* Logout */
     var doLogout = function () { auth.logout(); location.href = 'index.html'; };

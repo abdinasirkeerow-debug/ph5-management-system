@@ -76,6 +76,8 @@
 
   /* ---------- Modal ---------- */
   var activeModal = null;
+  var escapeKeyHandler = null;
+  
   function openModal(opts) {
     closeModal();
     var backdrop = document.createElement('div');
@@ -92,6 +94,17 @@
     backdrop.appendChild(modal);
     backdrop.addEventListener('click', function (e) { if (e.target === backdrop && !opts.locked) closeModal(); });
     modal.querySelector('.modal-close').addEventListener('click', function () { if (!opts.locked) closeModal(); });
+    
+    // Add Escape key handler
+    if (!opts.locked) {
+      escapeKeyHandler = function (e) {
+        if (e.key === 'Escape') {
+          closeModal();
+        }
+      };
+      document.addEventListener('keydown', escapeKeyHandler);
+    }
+    
     document.body.appendChild(backdrop);
     activeModal = backdrop;
     return {
@@ -102,10 +115,15 @@
       close: closeModal
     };
   }
+  
   function closeModal() {
     if (activeModal) {
       if (activeModal.parentNode) activeModal.parentNode.removeChild(activeModal);
       activeModal = null;
+      if (escapeKeyHandler) {
+        document.removeEventListener('keydown', escapeKeyHandler);
+        escapeKeyHandler = null;
+      }
     }
   }
 
@@ -266,6 +284,25 @@
 
   function fmtMoney(n) { return money(n); }
 
+  function applyMobileTableLabels(root) {
+    if (!root) return;
+    var tables = root.querySelectorAll('table.table');
+    tables.forEach(function (table) {
+      var headers = Array.prototype.slice.call(table.querySelectorAll('thead th')).map(function (th) {
+        return (th.textContent || '').replace(/\s+/g, ' ').trim();
+      });
+      var rows = table.querySelectorAll('tbody tr');
+      rows.forEach(function (row) {
+        var cells = row.querySelectorAll('td');
+        cells.forEach(function (cell, index) {
+          var label = headers[index] || cell.getAttribute('data-label') || 'Value';
+          if (!label) label = 'Value';
+          cell.setAttribute('data-label', label);
+        });
+      });
+    });
+  }
+
   PH5.ui = {
     escape: escape, money: money, fmtMoney: money,
     fmtDate: fmtDate, fmtDateTime: fmtDateTime, timeAgo: timeAgo,
@@ -274,6 +311,7 @@
     statusBadge: statusBadge, avatar: avatar, emptyState: emptyState,
     statCard: statCard, formValues: formValues,
     setFieldError: setFieldError, clearFormErrors: clearFormErrors,
-    fieldHTML: fieldHTML, searchFilter: searchFilter
+    fieldHTML: fieldHTML, searchFilter: searchFilter,
+    applyMobileTableLabels: applyMobileTableLabels
   };
 })();
