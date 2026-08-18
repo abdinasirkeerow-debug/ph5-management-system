@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Public Health Batch Five — Management System | Zamzam University</title>
+  <meta name="description" content="The official management system for Public Health Batch Five at Zamzam University of Science &amp; Technology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+<body class="lp-body">
+
+  <!-- ================= Header ================= -->
+  <header class="lp-header" id="lp-header">
+    <div class="container lp-header-inner">
+      <a class="lp-logo" href="#top" aria-label="Public Health Batch Five home">
+        <div class="logo-badge"><i class="fa-solid fa-graduation-cap"></i></div>
+        <span class="lp-logo-txt">
+          <span class="b1">Public Health Batch 5</span>
+          <span class="b2">Zamzam University</span>
+        </span>
+      </a>
+
+      <nav class="lp-nav" id="lp-nav" aria-label="Landing navigation">
+        <a href="#top">Home</a>
+        <a href="#portals">Portals</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="lp-header-actions">
+        <button class="btn btn-sm btn-ghost lp-signin" onclick="PH5Landing.openPortal('student')">Sign in</button>
+        <button class="btn btn-primary btn-sm lp-get-started" onclick="PH5Landing.scrollToPortals()">Get Started</button>
+        <button class="lp-menu-btn" id="lp-menu-btn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= Hero ================= -->
+    <section class="lp-hero">
+      <div class="container lp-hero-inner">
+        <div class="lp-hero-text">
+          <span class="lp-kicker"><i class="fa-solid fa-star-of-life"></i> Public Health · Batch Five · Zamzam University</span>
+          <h1>Everything for your <span class="grad">public health</span> batch, in one place.</h1>
+          <p>Fees, payments, attendance and your student record — managed digitally for all
+            59 students of Public Health Batch Five. Pick your portal and sign in.</p>
+
+          <div class="lp-hero-cta">
+            <button class="btn btn-primary btn-lg" onclick="PH5Landing.scrollToPortals()">
+              Get Started <i class="fa-solid fa-arrow-down"></i>
+            </button>
+            <button class="btn btn-lg btn-glass" onclick="PH5Landing.openPortal('student')">
+              <i class="fa-solid fa-user-graduate"></i> Student Sign in
+            </button>
+          </div>
+
+          <div class="lp-hero-stats">
+            <div class="lp-stat"><b>59</b><span>Students</span></div>
+            <div class="lp-stat"><b>3</b><span>Portals</span></div>
+            <div class="lp-stat"><b>100%</b><span>Digital</span></div>
+          </div>
+        </div>
+
+        <div class="lp-hero-visual" aria-hidden="true">
+          <svg class="lp-illu" viewBox="0 0 520 460" role="img" aria-label="Public health illustration">
+            <defs>
+              <linearGradient id="lpBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#0a2356"/>
+                <stop offset="1" stop-color="#1d4bc0"/>
+              </linearGradient>
+              <linearGradient id="lpTeal" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#08AEB6"/>
+                <stop offset="1" stop-color="#0e7d99"/>
+              </linearGradient>
+              <linearGradient id="lpShield" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff"/>
+                <stop offset="1" stop-color="#e6efff"/>
+              </linearGradient>
+              <pattern id="lpDots" width="26" height="26" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.6" fill="#ffffff" opacity="0.12"/>
+              </pattern>
+            </defs>
+
+            <rect width="520" height="460" rx="30" fill="url(#lpBg)"/>
+            <rect width="520" height="460" rx="30" fill="url(#lpDots)"/>
+            <circle cx="448" cy="70" r="130" fill="#08AEB6" opacity="0.16"/>
+            <circle cx="46" cy="420" r="150" fill="#2f66d9" opacity="0.22"/>
+            <circle cx="330" cy="396" r="90" fill="#08AEB6" opacity="0.12"/>
+
+            <!-- Shield + cross emblem -->
+            <g transform="translate(260 196)">
+              <path d="M0 -84 C44 -70 78 -52 92 -30 C106 -8 108 20 100 48 C90 84 62 108 32 120 C12 128 -12 128 -32 120 C-62 108 -90 84 -100 48 C-108 20 -106 -8 -92 -30 C-78 -52 -44 -70 0 -84 Z"
+                    fill="#ffffff" opacity="0.12"/>
+              <path d="M0 -72 C38 -60 66 -45 78 -26 C90 -7 92 17 85 42 C76 74 52 95 26 105 C9 112 -9 112 -26 105 C-52 95 -76 74 -85 42 C-92 17 -90 -7 -78 -26 C-66 -45 -38 -60 0 -72 Z"
+                    fill="url(#lpShield)"/>
+              <rect x="-14" y="-52" width="28" height="70" rx="6" fill="#1d4bc0"/>
+              <rect x="-35" y="-31" width="70" height="28" rx="6" fill="#1d4bc0"/>
+              <circle cy="68" r="4" fill="#08AEB6"/>
+              <circle cx="30" cy="58" r="3" fill="#08AEB6" opacity="0.7"/>
+              <circle cx="-30" cy="60" r="3" fill="#08AEB6" opacity="0.7"/>
+            </g>
+
+            <!-- Heartbeat line -->
+            <polyline points="110,236 150,236 168,208 184,268 202,236 244,236"
+                      fill="none" stroke="#08AEB6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="276,236 316,236 334,208 350,268 368,236 410,236"
+                      fill="none" stroke="#08AEB6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+
+            <!-- Graduation cap -->
+            <g transform="translate(96 330)">
+              <path d="M0 -26 L42 -8 L0 12 L-42 -8 Z" fill="#08AEB6"/>
+              <path d="M0 -26 L42 -8 L42 -2 L0 6 L-42 -2 L-42 -8 Z" fill="#0b7f7a"/>
+              <path d="M0 12 L0 34 L28 22 L28 0" fill="none" stroke="#0b7f7a" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <!-- Stethoscope arc -->
+            <g transform="translate(424 322)">
+              <path d="M0 -44 A50 50 0 1 0 0 44" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+              <path d="M0 -44 A50 50 0 1 0 0 44" fill="none" stroke="#08AEB6" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+              <circle cx="0" cy="44" r="12" fill="none" stroke="#08AEB6" stroke-width="4"/>
+            </g>
+          </svg>
+
+          <div class="lp-float-card fc-1">
+            <div class="fc-ico teal"><i class="fa-solid fa-calendar-check"></i></div>
+            <div><b>Attendance 95%</b><span>Batch average</span></div>
+          </div>
+          <div class="lp-float-card fc-2">
+            <div class="fc-ico royal"><i class="fa-solid fa-receipt"></i></div>
+            <div><b>Fees digital</b><span>Tracked in real time</span></div>
+          </div>
+          <div class="lp-float-card fc-3">
+            <div class="fc-ico navy"><i class="fa-solid fa-shield-halved"></i></div>
+            <div><b>Secure portal</b><span>Role-based access</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Portals ================= -->
+    <section class="lp-section lp-portals" id="portals">
+      <div class="container">
+        <div class="lp-section-head">
+          <span class="lp-kicker plain"><i class="fa-solid fa-id-card"></i> Choose your portal</span>
+          <h2>Sign in to your portal</h2>
+          <p>Each portal is tailored to its role. All sign-ins use your official
+            Batch Five account — no credentials are ever shown publicly.</p>
+        </div>
+
+        <div class="lp-portal-grid">
+          <!-- Student -->
+          <div class="lp-portal-card">
+            <div class="lp-portal-ico grad-navy"><i class="fa-solid fa-user-graduate"></i></div>
+            <h3>Student Portal</h3>
+            <p>View your own profile, fee status, payment history and practical-attendance record.</p>
+            <button class="btn btn-primary btn-block btn-lg" onclick="PH5Landing.openPortal('student')">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign in as Student
+            </button>
+            <a class="lp-portal-link" href="#" onclick="PH5Landing.info('student'); return false;">
+              New student? Activate your account
+            </a>
+          </div>
+
+          <!-- Class Leader -->
+          <div class="lp-portal-card">
+            <div class="lp-portal-ico grad-teal"><i class="fa-solid fa-user-group"></i></div>
+            <h3>Class Leaders Portal</h3>
+            <p>A read-only overview of the whole batch — all 59 students, fee requirements, payments and attendance.</p>
+            <button class="btn btn-primary btn-block btn-lg" onclick="PH5Landing.openPortal('leader')">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign in as Class Leader
+            </button>
+          </div>
+
+          <!-- Staff / Admin -->
+          <div class="lp-portal-card">
+            <div class="lp-portal-ico grad-royal"><i class="fa-solid fa-user-shield"></i></div>
+            <h3>Staff / Admin Portal</h3>
+            <p>Full management — dashboard, students, fees, payments, subjects &amp; attendance, accounts and audit log.</p>
+            <button class="btn btn-primary btn-block btn-lg" onclick="PH5Landing.openPortal('staff')">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign in as Staff
+            </button>
+            <a class="lp-portal-link" href="#" onclick="PH5Landing.info('staff'); return false;">
+              Forgot password?
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Info strip ================= -->
+    <section class="lp-strip" id="about">
+      <div class="container">
+        <div class="lp-strip-grid">
+          <div class="lp-strip-text">
+            <span class="lp-kicker on-dark"><i class="fa-solid fa-building-columns"></i> Zamzam University of Science &amp; Technology</span>
+            <h2>Public Health · Batch Five — a fully digital student management system</h2>
+            <p>From registration to graduation, every record for the batch lives in one
+              secure system. Students follow their own progress; the class leader
+              oversees the batch; and staff manage everything behind the scenes.</p>
+          </div>
+          <div class="lp-strip-feats">
+            <div class="lp-feat">
+              <div class="lp-feat-ico"><i class="fa-solid fa-check-double"></i></div>
+              <div><b>Role-based access</b><span>Student, Class Leader and Admin portals each see exactly what they need.</span></div>
+            </div>
+            <div class="lp-feat">
+              <div class="lp-feat-ico"><i class="fa-solid fa-money-check-dollar"></i></div>
+              <div><b>Safe fee payments</b><span>Payments are recorded in $1 / $2 transactions with overpayment protection.</span></div>
+            </div>
+            <div class="lp-feat">
+              <div class="lp-feat-ico"><i class="fa-solid fa-clipboard-check"></i></div>
+              <div><b>Practical attendance</b><span>Attendance marked per subject and date, with session management for staff.</span></div>
+            </div>
+            <div class="lp-feat">
+              <div class="lp-feat-ico"><i class="fa-solid fa-database"></i></div>
+              <div><b>Backup &amp; audit</b><span>Full audit log and one-click JSON backup &amp; restore for administrators.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Features / stats ================= -->
+    <section class="lp-section lp-features" id="features">
+      <div class="container">
+        <div class="lp-section-head">
+          <span class="lp-kicker plain"><i class="fa-solid fa-heart-pulse"></i> Why Batch Five trusts this system</span>
+          <h2>Built for students, run by staff</h2>
+        </div>
+        <div class="lp-feat-grid">
+          <div class="lp-feat-card">
+            <div class="lp-feat-ico lg navy"><i class="fa-solid fa-user"></i></div>
+            <h3>Personal records</h3>
+            <p>Every student's profile, fee balance and attendance — always up to date.</p>
+          </div>
+          <div class="lp-feat-card">
+            <div class="lp-feat-ico lg teal"><i class="fa-solid fa-credit-card"></i></div>
+            <h3>Live balances</h3>
+            <p>Fee status flips automatically between UNPAID, PARTIAL and PAID.</p>
+          </div>
+          <div class="lp-feat-card">
+            <div class="lp-feat-ico lg royal"><i class="fa-solid fa-user-lock"></i></div>
+            <h3>Secure sign-in</h3>
+            <p>Salted password hashing and forced password change on first login.</p>
+          </div>
+          <div class="lp-feat-card">
+            <div class="lp-feat-ico lg navy"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Batch overview</h3>
+            <p>Class leaders see the whole picture with a read-only batch dashboard.</p>
+          </div>
+          <div class="lp-feat-card">
+            <div class="lp-feat-ico lg teal"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <h3>Works everywhere</h3>
+            <p>Fully responsive — desktop, tablet and mobile.</p>
+          </div>
+          <div class="lp-feat-card">
+            <div class="lp-feat-ico lg royal"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <h3>Full audit log</h3>
+            <p>Every critical action is logged with the person who did it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="lp-footer" id="contact">
+    <div class="container">
+      <div class="lp-footer-grid">
+        <div class="lp-footer-brand">
+          <div class="lp-logo">
+            <div class="logo-badge"><i class="fa-solid fa-graduation-cap"></i></div>
+            <span class="lp-logo-txt">
+              <span class="b1">Public Health Batch 5</span>
+              <span class="b2">Zamzam University</span>
+            </span>
+          </div>
+          <p>Management System for the 59 registered students of Public Health Batch Five.</p>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Portals</h4>
+          <a href="#" onclick="PH5Landing.openPortal('student'); return false;">Student Portal</a>
+          <a href="#" onclick="PH5Landing.openPortal('leader'); return false;">Class Leaders Portal</a>
+          <a href="#" onclick="PH5Landing.openPortal('staff'); return false;">Staff / Admin Portal</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Quick links</h4>
+          <a href="#top">Home</a>
+          <a href="#portals">Portals</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+        </div>
+        <div class="lp-footer-col">
+          <h4>Contact</h4>
+          <a href="#contact"><i class="fa-solid fa-location-dot"></i> Zamzam University of Science &amp; Technology</a>
+          <a href="#contact"><i class="fa-solid fa-book-open"></i> Faculty of Health Sciences · Public Health</a>
+          <a href="#contact"><i class="fa-solid fa-envelope"></i> accounts@zamzam.edu</a>
+        </div>
+      </div>
+      <div class="lp-footer-bottom">
+        <span>© 2026 Zamzam University of Science &amp; Technology · Public Health · Batch Five</span>
+        <span class="lp-footer-secure"><i class="fa-solid fa-lock"></i> Secure sign-in</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= Backdrop + login modals ================= -->
+  <div class="lm-backdrop" id="lm-backdrop" hidden></div>
+
+  <!-- Student login -->
+  <div class="lm-modal" id="lm-student" role="dialog" aria-modal="true" aria-labelledby="lm-student-title" hidden>
+    <div class="lm-modal-head">
+      <div class="lm-modal-title">
+        <div class="lm-ico grad-navy"><i class="fa-solid fa-user-graduate"></i></div>
+        <div>
+          <h3 id="lm-student-title">Student Portal</h3>
+          <p>Sign in with your Student ID</p>
+        </div>
+      </div>
+      <button class="lm-close" data-lm-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="lm-modal-body">
+      <div class="lm-error" id="lm-err-student" hidden><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+      <form class="lm-form" data-role="student" autocomplete="on">
+        <div class="lm-field">
+          <label for="st-user">Student ID</label>
+          <div class="lm-input">
+            <i class="fa-solid fa-id-card"></i>
+            <input id="st-user" name="username" type="text" placeholder="e.g. HS231429" autocomplete="username" required />
+          </div>
+        </div>
+        <div class="lm-field">
+          <label for="st-pass">Password</label>
+          <div class="lm-input">
+            <i class="fa-solid fa-lock"></i>
+            <input id="st-pass" name="password" type="password" placeholder="Your password" autocomplete="current-password" required />
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign in
+        </button>
+      </form>
+      <p class="lm-hint">New student? <a href="#" onclick="PH5Landing.info('student'); return false;">How to activate your account</a></p>
+    </div>
+  </div>
+
+  <!-- Class leader login -->
+  <div class="lm-modal" id="lm-leader" role="dialog" aria-modal="true" aria-labelledby="lm-leader-title" hidden>
+    <div class="lm-modal-head">
+      <div class="lm-modal-title">
+        <div class="lm-ico grad-teal"><i class="fa-solid fa-user-group"></i></div>
+        <div>
+          <h3 id="lm-leader-title">Class Leaders Portal</h3>
+          <p>Sign in with your account</p>
+        </div>
+      </div>
+      <button class="lm-close" data-lm-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="lm-modal-body">
+      <div class="lm-error" id="lm-err-leader" hidden><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+      <form class="lm-form" data-role="leader" autocomplete="on">
+        <div class="lm-field">
+          <label for="ld-user">Username or Student ID</label>
+          <div class="lm-input">
+            <i class="fa-solid fa-user"></i>
+            <input id="ld-user" name="username" type="text" placeholder="Your username or Student ID" autocomplete="username" required />
+          </div>
+        </div>
+        <div class="lm-field">
+          <label for="ld-pass">Password</label>
+          <div class="lm-input">
+            <i class="fa-solid fa-lock"></i>
+            <input id="ld-pass" name="password" type="password" placeholder="Your password" autocomplete="current-password" required />
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign in
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Staff / admin login -->
+  <div class="lm-modal" id="lm-staff" role="dialog" aria-modal="true" aria-labelledby="lm-staff-title" hidden>
+    <div class="lm-modal-head">
+      <div class="lm-modal-title">
+        <div class="lm-ico grad-royal"><i class="fa-solid fa-user-shield"></i></div>
+        <div>
+          <h3 id="lm-staff-title">Staff / Admin Portal</h3>
+          <p>Sign in with your staff account</p>
+        </div>
+      </div>
+      <button class="lm-close" data-lm-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="lm-modal-body">
+      <div class="lm-error" id="lm-err-staff" hidden><i class="fa-solid fa-circle-exclamation"></i><span></span></div>
+      <form class="lm-form" data-role="staff" autocomplete="on">
+        <div class="lm-field">
+          <label for="ad-user">Username or Email</label>
+          <div class="lm-input">
+            <i class="fa-solid fa-user"></i>
+            <input id="ad-user" name="username" type="text" placeholder="Your username or email" autocomplete="username" required />
+          </div>
+        </div>
+        <div class="lm-field">
+          <label for="ad-pass">Password</label>
+          <div class="lm-input">
+            <i class="fa-solid fa-lock"></i>
+            <input id="ad-pass" name="password" type="password" placeholder="Your password" autocomplete="current-password" required />
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign in
+        </button>
+      </form>
+      <p class="lm-hint"><a href="#" onclick="PH5Landing.info('staff'); return false;"><i class="fa-solid fa-key"></i> Forgot password?</a></p>
+    </div>
+  </div>
+
+  <!-- Info modal (activation / forgot-password guidance) -->
+  <div class="lm-modal lm-info" id="lm-info" role="dialog" aria-modal="true" aria-labelledby="lm-info-title" hidden>
+    <div class="lm-modal-head">
+      <div class="lm-modal-title">
+        <div class="lm-ico grad-teal"><i class="fa-solid fa-circle-info"></i></div>
+        <div><h3 id="lm-info-title">How to get access</h3></div>
+      </div>
+      <button class="lm-close" data-lm-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="lm-modal-body">
+      <div class="lm-info-body" id="lm-info-content"></div>
+      <button class="btn btn-secondary btn-block" data-lm-close>Got it</button>
+    </div>
+  </div>
+
+  <!-- ================= Landing page script =================
+       Login is handled by the backend (PH5.auth.login), which sets the
+       session cookie and returns the session payload. -->
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      var $ = function (sel, root) { return (root || document).querySelector(sel); };
+      var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+
+      var INFO_CONTENT = {
+        student:
+          '<p>Student accounts are created by the <b>Class Leader</b> or the <b>Accounts Office</b>.</p>' +
+          '<ol><li>Ask the Class Leader or Accounts Office to create / activate your account.</li>' +
+          '<li>You will be given your Student ID and a temporary password.</li>' +
+          '<li>Sign in here with your Student ID — you will be asked to set a new password.</li></ol>' +
+          '<p class="text-muted">For help, contact the Accounts Office at <b>accounts@zamzam.edu</b>.</p>',
+        staff:
+          '<p>Password resets are handled by the system administrator from the <b>Accounts</b> page.</p>' +
+          '<ol><li>Contact the administrator or the Accounts Office.</li>' +
+          '<li>They will reset your password and give you a temporary one.</li>' +
+          '<li>On your next sign-in you will be asked to set a new password.</li></ol>' +
+          '<p class="text-muted">For help, contact <b>accounts@zamzam.edu</b>.</p>'
+      };
+
+      /* ---------- Modal helpers ---------- */
+      var backdrop = $('#lm-backdrop');
+      var modals = { student: $('#lm-student'), leader: $('#lm-leader'), staff: $('#lm-staff'), info: $('#lm-info') };
+
+      function closeModals() {
+        backdrop.hidden = true;
+        Object.keys(modals).forEach(function (k) { modals[k].hidden = true; });
+        document.body.classList.remove('lm-locked');
+      }
+      function openModal(key) {
+        $$('.lm-form').forEach(function (f) { f.reset(); });
+        Object.keys(modals).forEach(function (k) { modals[k].hidden = (k !== key); });
+        backdrop.hidden = false;
+        document.body.classList.add('lm-locked');
+        var first = modals[key].querySelector('input');
+        if (first) setTimeout(function () { first.focus(); }, 50);
+      }
+
+      backdrop.addEventListener('click', closeModals);
+      $$('[data-lm-close]').forEach(function (el) { el.addEventListener('click', closeModals); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModals(); });
+
+      /* ---------- Portal forms (all reuse PH5.auth.login) ---------- */
+      $$('.lm-form').forEach(function (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var role = form.getAttribute('data-role');
+          var errBox = $('#lm-err-' + role);
+          var errMsg = errBox.querySelector('span');
+          var btn = form.querySelector('button[type="submit"]');
+          var username = form.querySelector('[name="username"]').value.trim();
+          var password = form.querySelector('[name="password"]').value;
+
+          function showErr(msg) { errMsg.textContent = msg; errBox.hidden = false; }
+          function hideErr() { errBox.hidden = true; }
+
+          hideErr();
+          if (!username || !password) {
+            showErr('Please enter your ' + (role === 'student' ? 'Student ID' : 'username') + ' and password.');
+            return;
+          }
+
+          btn.disabled = true;
+          var original = btn.innerHTML;
+          btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Signing in…';
+
+          PH5.auth.login(username, password).then(function (res) {
+            btn.disabled = false;
+            btn.innerHTML = original;
+            if (res.ok) {
+              window.location.href = 'app.html';
+            } else {
+              showErr(res.error);
+            }
+          });
+        });
+      });
+
+      /* ---------- Landing API ---------- */
+      window.PH5Landing = {
+        openPortal: openModal,
+        scrollToPortals: function () {
+          var el = $('#portals');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          closeMobileMenu();
+        },
+        info: function (topic) {
+          $('#lm-info-content').innerHTML = INFO_CONTENT[topic] || '';
+          openModal('info');
+        }
+      };
+
+      /* ---------- Mobile menu ---------- */
+      var nav = $('#lp-nav');
+      var menuBtn = $('#lp-menu-btn');
+      function closeMobileMenu() { nav.classList.remove('open'); }
+      menuBtn.addEventListener('click', function () { nav.classList.toggle('open'); });
+      $$('#lp-nav a').forEach(function (a) { a.addEventListener('click', closeMobileMenu); });
+
+      /* ---------- Header shadow on scroll ---------- */
+      var header = $('#lp-header');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 8) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>

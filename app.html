@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Public Health Batch Five — Management System</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ======= Sidebar ======= -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <div class="logo-badge"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="brand-txt">
+          <div class="b1">Public Health Batch 5</div>
+          <div class="b2">Zamzam University</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav" id="sidebar-nav"></nav>
+      <div class="sidebar-foot">
+        <div class="sidebar-user" id="sidebar-user"></div>
+        <button class="btn btn-ghost btn-block mt-8" id="logout-btn" style="color:rgba(255,255,255,0.6);justify-content:flex-start;padding:10px 12px;">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span>
+        </button>
+      </div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- ======= Main ======= -->
+    <div class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menu-btn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+        <div class="crumb" id="crumb">Dashboard</div>
+        <div class="topbar-right">
+          <span class="role-chip" id="role-chip"></span>
+          <button class="btn btn-sm btn-secondary" id="logout-btn-top" title="Sign out"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
+        </div>
+      </header>
+      <main class="content" id="view"></main>
+    </div>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/portal-student.js"></script>
+  <script src="js/portal-admin.js"></script>
+  <script src="js/portal-admin2.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

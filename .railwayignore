@@ -1,0 +1,43 @@
+# ---- Railway deploy exclusions ----
+# Anything listed here is NOT uploaded to Railway. Secrets, local data and
+# dev-only files must never reach the build server. package.json, server.js,
+# backend/ and public/ are always included.
+
+# Secrets — never ship local env files
+.env
+.env.*
+!.env.example
+
+# Dependencies (installed during build)
+node_modules/
+
+# Local SQLite databases & journals — production uses the /app/data volume
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+backend/data/
+backend/data/*.db
+
+# Admin backups
+backend/backups/
+
+# Tests, logs, temp & local tooling (not needed at runtime)
+tests/
+*.test.js
+*.log
+npm-debug.log*
+coverage/
+test-results/
+output.log
+*.output.log
+tmp/
+.tmp*
+.vscode/
+.idea/
+*.secret
+*.pem
+
+# Version control (Railway pulls from git anyway)
+.git/
+.gitignore
