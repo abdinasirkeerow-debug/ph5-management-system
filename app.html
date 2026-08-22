@@ -41,6 +41,22 @@
       </header>
       <main class="content" id="view"></main>
     </div>
+
+    <!-- Student-only mobile navigation. It stays hidden for staff and class leaders. -->
+    <nav class="student-bottom-nav" id="student-bottom-nav" aria-label="Student navigation">
+      <button type="button" class="student-bottom-link" data-nav="dashboard" data-bottom-page="dashboard">
+        <i class="fa-solid fa-house"></i><span>Home</span>
+      </button>
+      <button type="button" class="student-bottom-link" data-nav="fees" data-bottom-page="fees">
+        <i class="fa-solid fa-receipt"></i><span>Fees</span>
+      </button>
+      <button type="button" class="student-bottom-link" data-nav="attendance" data-bottom-page="attendance">
+        <i class="fa-regular fa-calendar-check"></i><span>Attendance</span>
+      </button>
+      <button type="button" class="student-bottom-link" data-nav="profile" data-bottom-page="profile">
+        <i class="fa-solid fa-ellipsis"></i><span>More</span>
+      </button>
+    </nav>
   </div>
 
   <script src="js/db.js"></script>
