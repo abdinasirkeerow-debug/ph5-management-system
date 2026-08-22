@@ -47,6 +47,8 @@
   function buildSidebar() {
     var s = auth.session();
     if (!s) return;
+    document.body.classList.remove('role-student', 'role-class_leader', 'role-admin');
+    document.body.classList.add('role-' + s.role);
     var nav = NAV[s.role] || [];
     var container = document.getElementById('sidebar-nav');
     container.innerHTML = nav.map(function (item) {
@@ -80,6 +82,7 @@
 
     var view = document.getElementById('view');
     currentPage = key;
+    document.body.classList.toggle('student-dashboard-page', s.role === 'student' && key === 'dashboard');
     try {
       page(view, null);
       PH5.ui.applyMobileTableLabels(view);
@@ -90,6 +93,12 @@
     /* Highlight active nav */
     document.querySelectorAll('.nav-item').forEach(function (el) {
       el.classList.toggle('active', el.getAttribute('data-page') === key);
+    });
+    document.querySelectorAll('[data-bottom-page]').forEach(function (el) {
+      var active = el.getAttribute('data-bottom-page') === key;
+      el.classList.toggle('active', active);
+      if (active) el.setAttribute('aria-current', 'page');
+      else el.removeAttribute('aria-current');
     });
     document.getElementById('crumb').innerHTML = 'Public Health Batch 5 / <b>' + esc(pageTitle(key)) + '</b>';
     document.title = 'Batch Five — ' + pageTitle(key);
@@ -191,6 +200,20 @@
     });
     /* Clicks on elements that request navigation (e.g. dashboard buttons) */
     document.addEventListener('click', function (e) {
+      var logout = e.target.closest('[data-student-logout]');
+      if (logout) {
+        e.preventDefault();
+        auth.logout();
+        location.href = 'index.html';
+        return;
+      }
+      var scrollTarget = e.target.closest('[data-scroll-target]');
+      if (scrollTarget) {
+        e.preventDefault();
+        var target = document.getElementById(scrollTarget.getAttribute('data-scroll-target'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
       var el = e.target.closest('[data-nav]');
       if (el) { e.preventDefault(); showPage(el.getAttribute('data-nav')); }
     });

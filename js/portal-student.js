@@ -93,36 +93,86 @@
     var s = auth.session();
     var st = myStudent();
     if (!st) { el.innerHTML = ui.emptyState('fa-user-slash', 'Student record not found', 'Contact the administrator.'); return; }
-    var activeFees = db.fees().filter(function (f) { return f.isActive; });
+    var activeFees = db.fees().filter(function (f) { return f.isActive; })
+      .slice().sort(function (a, b) { return String(a.periodKey || '').localeCompare(String(b.periodKey || '')); });
     var dueFees = activeFees.filter(function (f) { return db.isDueFee(f); });
-    var totalRequired = dueFees.reduce(function (s2, f) { return s2 + f.amountRequired; }, 0);   // due months only
-    var totalScheduledAll = activeFees.reduce(function (s2, f) { return s2 + f.amountRequired; }, 0); // all 17 months
-    var totalPaid = dueFees.reduce(function (s2, f) { return s2 + db.paidFor(st.studentId, f.id); }, 0);
+    var totalRequired = dueFees.reduce(function (sum, fee) { return sum + fee.amountRequired; }, 0);
+    var totalPaid = dueFees.reduce(function (sum, fee) { return sum + db.paidFor(st.studentId, fee.id); }, 0);
+    var dueBalance = Math.max(0, totalRequired - totalPaid);
     var attn = db.studentAttendanceStats(st.studentId);
-    var recents = db.paymentsFor(st.studentId).slice().sort(function (a, b) { return b.date.localeCompare(a.date); }).slice(0, 5);
-
-    var greeting = new Date().getHours() < 12 ? 'Good morning' : (new Date().getHours() < 18 ? 'Good afternoon' : 'Good evening');
+    var subjects = db.subjects().filter(function (subject) { return subject.isActive; });
+    var now = new Date();
+    var todayKey = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    var todaySubjects = {};
+    db.attendanceFor(st.studentId).forEach(function (record) {
+      if (record.date === todayKey) todaySubjects[record.subjectId] = true;
+    });
+    var todayClasses = Object.keys(todaySubjects).length;
+    var greeting = now.getHours() < 12 ? 'Good morning' : (now.getHours() < 18 ? 'Good afternoon' : 'Good evening');
+    var firstName = st.fullName.split(' ')[0];
+    var dateLabel = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    var periodLabel = activeFees.length
+      ? monthLabel(activeFees[0].periodKey) + ' – ' + monthLabel(activeFees[activeFees.length - 1].periodKey)
+      : 'Current period';
 
     el.innerHTML =
-      '<div class="page-head">' +
-        '<div style="display:flex;align-items:center;gap:16px;">' +
-          ui.avatar(st.fullName, st.avatarColor, 56) +
-          '<div><h1>' + greeting + ', ' + esc(st.fullName.split(' ')[0]) + '</h1>' +
-          '<div class="subtitle">Student ID <b>' + esc(st.studentId) + '</b> · Public Health · Batch Five</div></div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="stat-grid">' +
-        ui.statCard('fa-receipt', 'navy', ui.money(totalRequired), 'Fees due now') +
-        ui.statCard('fa-circle-dollar-to-slot', 'teal', ui.money(totalPaid), 'Total paid') +
-        ui.statCard('fa-arrow-trend-up', totalPaid >= totalRequired ? 'green' : 'amber', ui.money(Math.max(0, totalRequired - totalPaid)), 'Due balance') +
-        ui.statCard('fa-calendar-plus', 'blue', ui.money(totalScheduledAll), 'Scheduled total (Aug 2026 – Dec 2027)') +
-      '</div>' +
-      '<div class="widget-grid">' +
-        '<div class="card widget-full"><div class="card-header"><h3>My monthly fees</h3></div><div class="card-body" style="padding:0;">' +
-          studentFeeBlocks(st) + '</div></div>' +
-      '</div>' +
-      '<div class="card"><div class="card-header"><h3>Recent payments</h3></div><div class="card-body" style="padding:0;">' +
-        recentTable(recents, true) + '</div></div>';
+      '<div class="student-dashboard">' +
+        '<header class="sd-header">' +
+          '<div><h1>Hi, ' + esc(firstName) + '</h1><p>' + esc(dateLabel) + '</p></div>' +
+          '<div class="sd-header-actions">' +
+            '<button type="button" class="sd-icon-button" data-scroll-target="student-announcements" aria-label="View announcements"><i class="fa-regular fa-bell"></i></button>' +
+            '<button type="button" class="sd-icon-button" data-nav="profile" aria-label="Open profile settings"><i class="fa-solid fa-gear"></i></button>' +
+          '</div>' +
+        '</header>' +
+
+        '<section class="sd-id-card" aria-label="Student identification card">' +
+          '<div class="sd-id-card-top"><span><i class="fa-solid fa-graduation-cap"></i> ZUST STUDENT</span><i class="fa-regular fa-eye-slash" aria-hidden="true"></i></div>' +
+          '<h2>' + esc(st.fullName) + '</h2>' +
+          '<div class="sd-id-grid">' +
+            '<div><span>ID NUMBER</span><strong>' + esc(st.studentId) + '</strong></div>' +
+            '<div><span>CLASS</span><strong>Public Health Batch 5</strong></div>' +
+            '<div><span>DEPARTMENT</span><strong>Health Science</strong></div>' +
+            '<div><span>PERIOD</span><strong>' + esc(periodLabel) + '</strong></div>' +
+          '</div>' +
+        '</section>' +
+
+        '<nav class="sd-quick-actions" aria-label="Student quick actions">' +
+          '<button type="button" class="sd-quick-action sd-action-blue" data-nav="fees"><span><i class="fa-solid fa-receipt"></i></span><b>My Fees</b></button>' +
+          '<button type="button" class="sd-quick-action sd-action-purple" data-nav="payments"><span><i class="fa-solid fa-wallet"></i></span><b>Payments</b></button>' +
+          '<button type="button" class="sd-quick-action sd-action-green" data-nav="attendance"><span><i class="fa-regular fa-calendar-check"></i></span><b>Attendance</b></button>' +
+          '<button type="button" class="sd-quick-action sd-action-cyan" data-nav="profile"><span><i class="fa-solid fa-ellipsis"></i></span><b>More</b></button>' +
+          '<button type="button" class="sd-quick-action sd-action-slate" data-student-logout><span><i class="fa-solid fa-arrow-right-from-bracket"></i></span><b>Sign Out</b></button>' +
+        '</nav>' +
+
+        '<section class="sd-section" aria-labelledby="student-updates-title">' +
+          '<h2 class="sd-section-title" id="student-updates-title">Latest Updates</h2>' +
+          '<div class="sd-welcome-card">' +
+            '<div class="sd-welcome-kicker"><i class="fa-solid fa-wand-magic-sparkles"></i> Student Dashboard</div>' +
+            '<h3>' + greeting + ', ' + esc(firstName) + '! <span aria-hidden="true">👋</span></h3>' +
+            '<p>' + esc(dateLabel) + '</p>' +
+          '</div>' +
+
+          '<div class="sd-stats">' +
+            '<button type="button" class="sd-stat" data-nav="fees"><span class="sd-stat-icon blue"><i class="fa-solid fa-receipt"></i></span><strong>' + ui.money(dueBalance) + '</strong><small>Fees due now</small></button>' +
+            '<button type="button" class="sd-stat" data-nav="attendance"><span class="sd-stat-icon green"><i class="fa-regular fa-circle-check"></i></span><strong>' + attn.rate + '%</strong><small>Attendance</small></button>' +
+            '<div class="sd-stat"><span class="sd-stat-icon purple"><i class="fa-solid fa-book-open"></i></span><strong>' + subjects.length + '</strong><small>Courses enrolled</small></div>' +
+          '</div>' +
+
+          '<div class="sd-today-note"><i class="fa-regular fa-calendar"></i><span><strong>' + todayClasses + '</strong> practical session' + (todayClasses === 1 ? '' : 's') + ' recorded today</span></div>' +
+        '</section>' +
+
+        '<section class="sd-section" id="student-announcements" aria-labelledby="student-announcements-title">' +
+          '<h2 class="sd-section-title sd-title-with-icon" id="student-announcements-title"><i class="fa-solid fa-bullhorn"></i> Announcements</h2>' +
+          '<div class="sd-empty-card"><span><i class="fa-solid fa-circle-info"></i></span><strong>No announcements at the moment</strong><p>Check back later for updates</p></div>' +
+        '</section>' +
+
+        '<section class="sd-section" aria-labelledby="student-quick-info-title">' +
+          '<h2 class="sd-section-title sd-title-with-icon" id="student-quick-info-title"><i class="fa-solid fa-arrow-trend-up"></i> Quick Info</h2>' +
+          '<div class="sd-info-card"><span></span><div><strong>Public Health Batch 5</strong><p>' + esc(periodLabel) + '</p></div></div>' +
+        '</section>' +
+
+        '<footer class="sd-footer">© 2026 ZUST Academic Portal</footer>' +
+      '</div>';
   }
 
   function recentTable(pays, showStudent) {
